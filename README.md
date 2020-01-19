@@ -1,0 +1,2 @@
+# SeeSpot
+Dog walking app
