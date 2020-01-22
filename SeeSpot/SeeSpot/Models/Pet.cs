@@ -7,6 +7,7 @@ namespace SeeSpot.Models
 {
     public class Pet
     {
+        public int ID { get; set; }
         public string Name { get; set; }
         public int Weight { get; set; }
         public DateTime Birthday { get; set; }
@@ -14,5 +15,7 @@ namespace SeeSpot.Models
         public string Color { get; set; }
         public string Breed { get; set; }
         public string Photo { get; set; }
+
+        //public IList<Pet> Pets { get; set; }
     }
 }
