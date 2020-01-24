@@ -10,9 +10,11 @@ namespace SeeSpot.Data
     public class SeeSpotDbContext : DbContext
     {
         public DbSet<Pet> Pets { get; set; }
+        public DbSet<Breed> Breeds { get; set; }
         public SeeSpotDbContext(DbContextOptions<SeeSpotDbContext> options) : base(options)
         {
 
         }
+        
     }
 }

@@ -1,0 +1,18 @@
+﻿@model List<SeeSpot.Models.Breed>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Breeds</h2>
+<ul>
+
+    @foreach (var breed in Model)
+    {
+        <li>@breed.Name</li>
+    }
+
+
+
+
+</ul>
+<p><a asp-controller="Category" asp-action="Add">Add Category</a></p>

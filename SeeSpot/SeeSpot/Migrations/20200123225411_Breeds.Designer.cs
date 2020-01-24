@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SeeSpot.Data;
 
 namespace SeeSpot.Migrations
 {
     [DbContext(typeof(SeeSpotDbContext))]
-    partial class SeeSpotDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200123225411_Breeds")]
+    partial class Breeds
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,10 +28,15 @@ namespace SeeSpot.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("BreedID")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("BreedID");
 
                     b.ToTable("Breeds");
                 });
@@ -44,8 +51,8 @@ namespace SeeSpot.Migrations
                     b.Property<DateTime>("Birthday")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("BreedID")
-                        .HasColumnType("int");
+                    b.Property<string>("Breed")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Color")
                         .HasColumnType("nvarchar(max)");
@@ -64,18 +71,14 @@ namespace SeeSpot.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("BreedID");
-
                     b.ToTable("Pets");
                 });
 
-            modelBuilder.Entity("SeeSpot.Models.Pet", b =>
+            modelBuilder.Entity("SeeSpot.Models.Breed", b =>
                 {
-                    b.HasOne("SeeSpot.Models.Breed", "Breed")
-                        .WithMany("Pets")
-                        .HasForeignKey("BreedID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("SeeSpot.Models.Breed", null)
+                        .WithMany("Breeds")
+                        .HasForeignKey("BreedID");
                 });
 #pragma warning restore 612, 618
         }

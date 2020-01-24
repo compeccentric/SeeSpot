@@ -13,7 +13,8 @@ namespace SeeSpot.Models
         public DateTime Birthday { get; set; }
         public bool Fixed { get; set; }
         public string Color { get; set; }
-        public string Breed { get; set; }
+        public Breed Breed { get; set; }
+        public int BreedID { get; set; }
         public string Photo { get; set; }
 
         //public IList<Pet> Pets { get; set; }

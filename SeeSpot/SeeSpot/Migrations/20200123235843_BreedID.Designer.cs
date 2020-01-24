@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SeeSpot.Data;
 
 namespace SeeSpot.Migrations
 {
     [DbContext(typeof(SeeSpotDbContext))]
-    partial class SeeSpotDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200123235843_BreedID")]
+    partial class BreedID
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
