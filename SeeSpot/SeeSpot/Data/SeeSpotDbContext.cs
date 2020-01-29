@@ -11,6 +11,7 @@ namespace SeeSpot.Data
     {
         public DbSet<Pet> Pets { get; set; }
         public DbSet<Breed> Breeds { get; set; }
+        public DbSet<Walk> Walks { get; set; }
         public SeeSpotDbContext(DbContextOptions<SeeSpotDbContext> options) : base(options)
         {
 

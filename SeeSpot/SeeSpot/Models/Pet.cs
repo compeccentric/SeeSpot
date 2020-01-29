@@ -16,6 +16,7 @@ namespace SeeSpot.Models
         public Breed Breed { get; set; }
         public int BreedID { get; set; }
         public string Photo { get; set; }
+        
 
         //public IList<Pet> Pets { get; set; }
     }

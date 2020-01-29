@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using SeeSpot.Models;
+using SeeSpot.ViewModels;
 
 namespace SeeSpot.Controllers
 {
@@ -23,6 +24,7 @@ namespace SeeSpot.Controllers
             return View();
         }
 
+        
         public IActionResult Privacy()
         {
             return View();
