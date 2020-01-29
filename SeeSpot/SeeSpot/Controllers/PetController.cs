@@ -28,7 +28,7 @@ namespace SeeSpot.Controllers
             AddPetViewModel addPetViewModel = new AddPetViewModel(context.Breeds.ToList());
             return View(addPetViewModel);
         }
-
+        
         [HttpPost]
         public IActionResult Add(AddPetViewModel addPetViewModel)
         { 
@@ -43,7 +43,8 @@ namespace SeeSpot.Controllers
                 {
                     Name = addPetViewModel.Name,
                     Weight = addPetViewModel.Weight,
-                    Breed = newBreed
+                    Breed = newBreed,
+                     
                 };
 
                 context.Pets.Add(newPet);

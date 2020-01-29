@@ -41,6 +41,12 @@ namespace SeeSpot.ViewModels
             }
 
         }
+        [DataType(DataType.Date)]
+        public DateTime? Birthday { get; set; }
+        public bool Fixed { get; set; }
+        public string Color { get; set; }
+        public string Photo { get; set; }
+        
         public AddPetViewModel() { }
     }
 }
