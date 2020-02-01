@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using SeeSpot.Data;
 using SeeSpot.Models;
@@ -12,10 +14,12 @@ namespace SeeSpot.Controllers
     public class PetController : Controller
     {
         private SeeSpotDbContext context;
-        
-        public PetController(SeeSpotDbContext dbContext)
+        private readonly IHostingEnvironment hostingEnvironment;
+
+        public PetController(SeeSpotDbContext dbContext, IHostingEnvironment hostingEnvironment)
         {
             context = dbContext;
+            this.hostingEnvironment = hostingEnvironment;
         }
         public IActionResult Index()
         {
@@ -30,20 +34,37 @@ namespace SeeSpot.Controllers
         }
         
         [HttpPost]
-        public IActionResult Add(AddPetViewModel addPetViewModel)
+        public IActionResult Add(AddPetViewModel model)
         { 
      
             if (ModelState.IsValid)
             {
+                string uniqueFileName = null;
+                if (model.Photo != null)
+                {
+                    string uploadsFolder = Path.Combine(hostingEnvironment.WebRootPath, "images");
+                    uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Photo.FileName;
+                    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                    model.Photo.CopyTo(new FileStream(filePath, FileMode.Create));
+                }
+
+
+
+
+
+
+
+
                 Breed newBreed =
-                    context.Breeds.Single(c => c.ID == addPetViewModel.BreedID);
+                    context.Breeds.Single(c => c.ID == model.BreedID);
 
                 // Add the new cheese to my existing cheeses
                 Pet newPet = new Pet
                 {
-                    Name = addPetViewModel.Name,
-                    Weight = addPetViewModel.Weight,
+                    Name = model.Name,
+                    Weight = model.Weight,
                     Breed = newBreed,
+                    PhotoPath = uniqueFileName
                      
                 };
 
@@ -53,7 +74,7 @@ namespace SeeSpot.Controllers
                 return Redirect("/Pet");
             }
 
-            return View(addPetViewModel);
+            return View(model);
         }
 
         //public IActionResult Remove()

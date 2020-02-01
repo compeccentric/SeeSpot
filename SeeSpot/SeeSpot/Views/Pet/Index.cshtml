@@ -5,6 +5,11 @@
 {
     <p>No Pets yet!</p>
 }
+@foreach(var pet in Model)
+{
+    var photoPath = "~/images/" + (pet.PhotoPath ?? "noimage.jpg");
+    <h2>@pet.Name</h2>
+    <img src="@photoPath" asp-append-version="true"/>
 
-
+}
 

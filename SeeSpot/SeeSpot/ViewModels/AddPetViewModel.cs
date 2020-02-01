@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using SeeSpot.Models;
 
@@ -45,7 +46,7 @@ namespace SeeSpot.ViewModels
         public DateTime? Birthday { get; set; }
         public bool Fixed { get; set; }
         public string Color { get; set; }
-        public string Photo { get; set; }
+        public IFormFile Photo { get; set; }
         
         public AddPetViewModel() { }
     }
