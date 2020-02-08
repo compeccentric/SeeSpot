@@ -2,7 +2,7 @@
 
 namespace SeeSpot.Migrations
 {
-    public partial class Walkretry : Migration
+    public partial class photopath : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

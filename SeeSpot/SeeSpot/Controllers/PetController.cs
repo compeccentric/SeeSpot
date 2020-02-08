@@ -13,7 +13,7 @@ namespace SeeSpot.Controllers
 {
     public class PetController : Controller
     {
-        private SeeSpotDbContext context;
+        private readonly SeeSpotDbContext context;
         private readonly IHostingEnvironment hostingEnvironment;
 
         public PetController(SeeSpotDbContext dbContext, IHostingEnvironment hostingEnvironment)

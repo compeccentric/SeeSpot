@@ -10,8 +10,8 @@ using SeeSpot.Data;
 namespace SeeSpot.Migrations
 {
     [DbContext(typeof(SeeSpotDbContext))]
-    [Migration("20200129233539_walkretry")]
-    partial class Walkretry
+    [Migration("20200201213217_photopath")]
+    partial class photopath
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -58,7 +58,7 @@ namespace SeeSpot.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Photo")
+                    b.Property<string>("PhotoPath")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Weight")
