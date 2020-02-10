@@ -60,7 +60,7 @@ namespace SeeSpot
 
             app.UseRouting();
 
-            //app.UseAuthorization();
+            app.UseAuthorization();
             app.UseAuthentication();
 
 

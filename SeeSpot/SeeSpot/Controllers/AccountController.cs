@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SeeSpot.Models;
+using SeeSpot.ViewModels;
 
 namespace SeeSpot.Controllers
 {
@@ -19,52 +20,75 @@ namespace SeeSpot.Controllers
             SignInMgr = signInManager;
 
         }
+        [HttpPost]
         public async Task<IActionResult> Logout()
         {
             await SignInMgr.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
         
-        public async Task<IActionResult> Login()
-        {
-            var result = await SignInMgr.PasswordSignInAsync("TestUser", "Test123!", false, false);
-            if (result.Succeeded)
-            {
-                return RedirectToAction("Index", "Home");
-            }
-            else
-            {
-                ViewBag.Result = "result is: " + result.ToString();
-            }
-            return View();
-        }        
+        //public async Task<IActionResult> Login()
+        //{
+        //    var result = await SignInMgr.PasswordSignInAsync("TestUser", "Test123!", false, false);
+        //    if (result.Succeeded)
+        //    {
+        //        return RedirectToAction("Index", "Home");
+        //    }
+        //    else
+        //    {
+        //        ViewBag.Result = "result is: " + result.ToString();
+        //    }
+        //    return View();
+        //}        
         
-        
-        public async Task<IActionResult> Register()
+        public IActionResult Register()
         {
-            try
-            {
-                ViewBag.Message = "User already registered";
-
-                ApplicationUser user = await UserMgr.FindByNameAsync("TestUser");
-                if (user == null)
-                {
-                    user = new ApplicationUser();
-                    user.UserName = "TestUser";
-                    user.Email = "TestUser@Test.com";
-                    user.FirstName = "John";
-                    
-                    IdentityResult result = await UserMgr.CreateAsync(user, "Test123!");
-                    ViewBag.Message = "User was created";
-                }
-            }
-            catch (Exception ex)
-            {
-                ViewBag.Message = ex.Message;
-            }
-
             return View();
         }
+        [HttpPost]
+        public async Task<IActionResult> Register(RegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var result = await UserMgr.CreateAsync(user, model.Password);
 
+                if (result.Succeeded)
+                {
+                    await SignInMgr.SignInAsync(user, isPersistent: false);
+                    return RedirectToAction("index", "home");
+                }
+                foreach(var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }  
+            }
+            return View(model);
+        }
+        public IActionResult Login()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+
+                var result = await SignInMgr.PasswordSignInAsync(model.Email, model.Password,
+                    model.RememberMe, false);
+
+                if (result.Succeeded)
+                {
+
+                    return RedirectToAction("index", "home");
+                }
+
+
+                ModelState.AddModelError(string.Empty, "Invalid Login Attempt");
+
+            }
+            return View(model);
+        }
     }
 }
