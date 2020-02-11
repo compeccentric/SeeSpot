@@ -40,7 +40,7 @@ namespace SeeSpot.Controllers
             if (ModelState.IsValid)
             {
                 
-                // Add the new cheese to my existing cheeses
+                
                 Walk newWalk = new Walk
                 {
                     Distance = addWalkViewModel.Distance,

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -11,7 +12,8 @@ namespace SeeSpot.Models
         public int Distance { get; set; }
         public bool Poop { get; set; }
         public bool Pee { get; set; }
-        public DateTime Date { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime? Date { get; set; }
         public DateTime Time { get; set; }
         public string Notes { get; set; }
         

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SeeSpot.Models;
@@ -26,25 +27,28 @@ namespace SeeSpot.Controllers
             await SignInMgr.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
-        
-        //public async Task<IActionResult> Login()
-        //{
-        //    var result = await SignInMgr.PasswordSignInAsync("TestUser", "Test123!", false, false);
-        //    if (result.Succeeded)
-        //    {
-        //        return RedirectToAction("Index", "Home");
-        //    }
-        //    else
-        //    {
-        //        ViewBag.Result = "result is: " + result.ToString();
-        //    }
-        //    return View();
-        //}        
-        
+        [AllowAnonymous]
+        [AcceptVerbs("Get","Post")]
+        public async Task<IActionResult> IsEmailInUse(string email)
+        {
+            var user = await UserMgr.FindByEmailAsync(email);
+            if(user == null)
+            {
+                return Json(true);
+            }
+            else
+            {
+                return Json($"Email {email} is already in use");
+            }
+        }
+
+
+        [AllowAnonymous]
         public IActionResult Register()
         {
             return View();
         }
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
@@ -65,12 +69,14 @@ namespace SeeSpot.Controllers
             }
             return View(model);
         }
+        [AllowAnonymous]
         public IActionResult Login()
         {
             return View();
         }
+        [AllowAnonymous]
         [HttpPost]
-        public async Task<IActionResult> Login(LoginViewModel model)
+        public async Task<IActionResult> Login(LoginViewModel model, string returnUrl)
         {
             if (ModelState.IsValid)
             {
@@ -80,8 +86,15 @@ namespace SeeSpot.Controllers
 
                 if (result.Succeeded)
                 {
-
-                    return RedirectToAction("index", "home");
+                    if (!string.IsNullOrEmpty(returnUrl))
+                    {
+                        return LocalRedirect(returnUrl);
+                    }
+                    else
+                    {
+                        return RedirectToAction("index", "home");
+                    }
+                    
                 }
 
 
