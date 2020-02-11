@@ -12,11 +12,9 @@ namespace SeeSpot.Controllers
     public class AdministrationController : Controller
     {
         private readonly RoleManager<IdentityRole> roleManager;
-        public AdministrationController(RoleManager<IdentityRole> roleManager,
-                                        UserManager<ApplicationUser> userManager)
+        public AdministrationController(RoleManager<IdentityRole> roleManager)                                     
         {
             this.roleManager = roleManager;
-            this.userManager = userManager;
         }
 
         [HttpGet]
@@ -24,6 +22,7 @@ namespace SeeSpot.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public async Task<IActionResult> CreateRole(CreateRoleViewModel model)
         {
@@ -46,6 +45,7 @@ namespace SeeSpot.Controllers
                     ModelState.AddModelError("", error.Description);
                 }
             }
+
             return View(model);
 
         }
@@ -73,12 +73,12 @@ namespace SeeSpot.Controllers
                 RoleName = role.Name
 
             };
-
-            foreach (var user in UserManager.Users)
+            
+            foreach (var user in userManager.Users)
             {
-                if (await UserManager.IsInRoleAsync(user, role.Name))
+                if (await userManager.IsInRoleAsync(user, role.Name))
                 {
-                    model.Users.Add(user, UserName);
+                    model.Users.Add(user.UserName);
                 }
             }
 

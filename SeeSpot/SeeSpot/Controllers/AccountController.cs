@@ -11,51 +11,40 @@ namespace SeeSpot.Controllers
 {
     public class AccountController : Controller
     {
-        private UserManager<ApplicationUser> UserMgr { get; }
-        private SignInManager<ApplicationUser> SignInMgr { get; }
-        public AccountController(UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager)
+        public readonly UserManager<IdentityUser> userManager;
+        public readonly SignInManager<IdentityUser> signInManager;
+        public AccountController(UserManager<IdentityUser> userManager,
+                                SignInManager<IdentityUser> signInManager)
+                                
         {
-            UserMgr = userManager;
-            SignInMgr = signInManager;
+            this.userManager = userManager;
+            this.signInManager = signInManager;
 
         }
-        [HttpPost]
-        public async Task<IActionResult> Logout()
-        {
-            await SignInMgr.SignOutAsync();
-            return RedirectToAction("Index", "Home");
-        }
         
-        //public async Task<IActionResult> Login()
-        //{
-        //    var result = await SignInMgr.PasswordSignInAsync("TestUser", "Test123!", false, false);
-        //    if (result.Succeeded)
-        //    {
-        //        return RedirectToAction("Index", "Home");
-        //    }
-        //    else
-        //    {
-        //        ViewBag.Result = "result is: " + result.ToString();
-        //    }
-        //    return View();
-        //}        
-        
+                
+        [HttpGet]
         public IActionResult Register()
         {
             return View();
         }
+
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await UserMgr.CreateAsync(user, model.Password);
+                var user = new IdentityUser 
+                { 
+                    UserName = model.Email, 
+                    Email = model.Email 
+                };
+                
+                var result = await userManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)
                 {
-                    await SignInMgr.SignInAsync(user, isPersistent: false);
+                    await signInManager.SignInAsync(user, isPersistent: false);
                     return RedirectToAction("index", "home");
                 }
                 foreach(var error in result.Errors)
@@ -75,20 +64,24 @@ namespace SeeSpot.Controllers
             if (ModelState.IsValid)
             {
 
-                var result = await SignInMgr.PasswordSignInAsync(model.Email, model.Password,
+                var result = await signInManager.PasswordSignInAsync(model.Email, model.Password,
                     model.RememberMe, false);
 
                 if (result.Succeeded)
                 {
-
                     return RedirectToAction("index", "home");
                 }
-
-
+                
                 ModelState.AddModelError(string.Empty, "Invalid Login Attempt");
 
             }
             return View(model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            await signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
         }
     }
 }
