@@ -7,6 +7,8 @@ using Microsoft.Extensions.Hosting;
 using SeeSpot.Data;
 using Microsoft.AspNetCore.Identity;
 using SeeSpot.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 namespace SeeSpot
 {
@@ -24,7 +26,7 @@ namespace SeeSpot
         {
 
             //services.AddDbContext<SeeSpotDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            
+
             services.AddControllersWithViews();
 
             services.AddDbContext<SeeSpotDbContext>(cfg =>
@@ -36,10 +38,14 @@ namespace SeeSpot
             {
                 options.User.RequireUniqueEmail = true;
             }).AddEntityFrameworkStores<SeeSpotDbContext>();
-                      
+            services.AddMvc(options =>
+            {
+                var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+                options.Filters.Add(new AuthorizeFilter(policy));
 
 
-            
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

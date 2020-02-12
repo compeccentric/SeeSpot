@@ -1,0 +1,36 @@
+﻿@model List<SeeSpot.Models.Walk>
+
+<h1>Walks</h1>
+<p>
+    <a asp-controller="Walk" asp-action="Add">Add</a>&nbsp;&nbsp;
+    @*<a asp-controller="Walk" asp-action="Remove">Remove</a>*@
+</p>
+@if (Model.Count == 0)
+{
+    <p>No Walks yet!</p>
+}
+<table class="table">
+    <tr>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Distance</th>
+        <th>Poop</th>
+        <th>Pee</th>
+        <th>Notes</th>
+    </tr>
+    @foreach (var walk in Model)
+    {
+<tr>
+    <th>@walk.Date</th>
+    <th>@walk.Time</th>
+    <th>@walk.Distance</th>
+    <th>@walk.Poop</th>
+    <th>@walk.Pee</th>
+    <th>@walk.Notes</th>
+    <th><a asp-controller="Home" asp-action="Details" asp-route-id="@walk.ID">View</a></th>
+    <th><a asp-controller="Home" asp-action="Edit" asp-route-id="@walk.ID">Edit</a></th>
+    <th><a asp-controller="Medication" asp-action="Delete" asp-route-id="@walk.ID">Delete</a></th>
+</tr>
+    }
+</table>
+
