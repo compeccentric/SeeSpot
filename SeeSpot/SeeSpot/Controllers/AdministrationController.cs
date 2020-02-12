@@ -12,9 +12,12 @@ namespace SeeSpot.Controllers
     public class AdministrationController : Controller
     {
         private readonly RoleManager<IdentityRole> roleManager;
-        public AdministrationController(RoleManager<IdentityRole> roleManager)                                     
+        private readonly UserManager<ApplicationUser> userManager;
+        public AdministrationController(RoleManager<IdentityRole> roleManager,
+                                        UserManager<ApplicationUser> userManager)                                     
         {
             this.roleManager = roleManager;
+            this.userManager = userManager;
         }
 
         [HttpGet]
@@ -73,7 +76,7 @@ namespace SeeSpot.Controllers
                 RoleName = role.Name
 
             };
-            
+
             foreach (var user in userManager.Users)
             {
                 if (await userManager.IsInRoleAsync(user, role.Name))
