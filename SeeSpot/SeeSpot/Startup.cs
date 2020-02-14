@@ -34,7 +34,7 @@ namespace SeeSpot
                 cfg.UseSqlServer(Configuration.GetConnectionString("SeeSpot"));
             });
 
-            services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
+            services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {
                 options.User.RequireUniqueEmail = true;
             }).AddEntityFrameworkStores<SeeSpotDbContext>();

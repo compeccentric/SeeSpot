@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace SeeSpot.Data
 {
-    public class SeeSpotDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, int>
+    public class SeeSpotDbContext : IdentityDbContext<ApplicationUser>
     {
                
         public DbSet<Pet> Pets { get; set; }
