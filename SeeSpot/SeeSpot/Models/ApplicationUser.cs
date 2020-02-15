@@ -8,6 +8,6 @@ namespace SeeSpot.Models
 {
     public class ApplicationUser : IdentityUser
     {
-        public string FirstName { get; set; }
+        //public string FirstName { get; set; }
     }
 }
