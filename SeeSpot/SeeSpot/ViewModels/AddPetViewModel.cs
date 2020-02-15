@@ -16,6 +16,7 @@ namespace SeeSpot.ViewModels
         public string Name { get; set; }
 
         [Required(ErrorMessage = "You must give your pet a Name")]
+        public string Gender { get; set; }
         public int Weight { get; set; }
 
         [Required]
@@ -45,6 +46,7 @@ namespace SeeSpot.ViewModels
         [DataType(DataType.Date)]
         public DateTime? Birthday { get; set; }
         public bool Fixed { get; set; }
+        public bool Microchipped { get; set; }
         public string Color { get; set; }
         public IFormFile Photo { get; set; }
         

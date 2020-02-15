@@ -31,13 +31,18 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Walk" asp-action="Index">Walks</a>
                         </li>
-                        @if  (SignInMgr.IsSignedIn(User) && User.IsInRole("Admin"))
+                        @if (SignInMgr.IsSignedIn(User) && User.IsInRole("Admin"))
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Administration" asp-action="ListRoles">Manager Roles</a>
                             </li>
                         }
-                        
+                        @if (SignInMgr.IsSignedIn(User) && User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Breed" asp-action="Index">Manage Breeds</a>
+                            </li>
+                        }
                         @if (SignInMgr.IsSignedIn(User))
                         {
                             <li class="nav-item ml-auto">

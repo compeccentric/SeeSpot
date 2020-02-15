@@ -10,6 +10,11 @@
         <span asp-validation-for="Name"></span>
     </div>
     <div class="form-group">
+        <label asp-for="Gender"></label>
+        <input class="form-control" asp-for="Gender" />
+        <span asp-validation-for="Gender"></span>
+    </div>
+    <div class="form-group">
         <label asp-for="Weight"></label>
         <input class="form-control" asp-for="Weight" />
         <span asp-validation-for="Weight"></span>
@@ -30,27 +35,32 @@
         <span asp-validation-for="Fixed"></span>
     </div>
     <div class="form-group">
+        <label asp-for="Microchipped"></label>
+        <input class="form-control" asp-for="Microchipped" />
+        <span asp-validation-for="Microchipped"></span>
+    </div>
+    <div class="form-group">
         <label asp-for="Color"></label>
         <input class="form-control" asp-for="Color" />
         <span asp-validation-for="Color"></span>
     </div>
-    
+
     <div class="custom-file">
 
         <input asp-for="Photo" class="form-control custom-file-input">
         <label class="custom-file-label">Choose File...</label>
 
     </div>
-    
+
     <input asp-page-handler="Upload" class="btn" type="submit" value="Upload" />
     @section Scripts {
-    <script>
-        $(document).ready(function () {
-            $('.custom-file-input').on("change", function () {
-                var fileName = $(this).val().split("\\").pop();
-                $(this).next('.custom-file-label').html(fileName);
-            })
-        });
-    </script>
+        <script>
+            $(document).ready(function () {
+                $('.custom-file-input').on("change", function () {
+                    var fileName = $(this).val().split("\\").pop();
+                    $(this).next('.custom-file-label').html(fileName);
+                })
+            });
+        </script>
     }
 </form>

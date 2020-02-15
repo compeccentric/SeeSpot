@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SeeSpot.Data;
 using SeeSpot.Models;
@@ -9,6 +10,7 @@ using SeeSpot.ViewModels;
 
 namespace SeeSpot.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class BreedController : Controller
     {
         
