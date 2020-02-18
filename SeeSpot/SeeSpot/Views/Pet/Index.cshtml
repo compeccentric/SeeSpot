@@ -11,6 +11,17 @@
 {
     var photoPath = "~/images/" + (pet.PhotoPath ?? "noimage.jpg");
     <h2>@pet.Name</h2>
-    <img src="@photoPath" asp-append-version="true" />
+    
+   
+    <br />
+    
+    <td>
+        <a asp-action="Edit" asp-controller="pet" asp-route-ID="@pet.ID">Edit</a>
+        <a asp-action="Profile" asp-route-ID="@pet.ID">Profile</a>
+        <a asp-action="Delete" asp-route-ID="@pet.ID">Delete</a>
+    </td>
+    <br />
+    <img src="@photoPath" asp-append-version="true" />  
 
 }
+
