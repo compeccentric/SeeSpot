@@ -22,4 +22,6 @@ namespace SeeSpot.Models
 
         //public IList<Pet> Pets { get; set; }
     }
+
+    
 }

@@ -13,7 +13,7 @@ namespace SeeSpot.Models
         public bool Poop { get; set; }
         public bool Pee { get; set; }
         [DataType(DataType.Date)]
-        public DateTime? Date { get; set; }
+        public DateTime Date { get; set; }
         public DateTime Time { get; set; }
         public string Notes { get; set; }
         
