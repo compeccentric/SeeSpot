@@ -82,11 +82,17 @@ namespace SeeSpot.Controllers
         {
 
             Pet pet = context.Pets.Find(ID);
-            if (ID == null)
+            ProfileViewModel profileViewModel = new ProfileViewModel
             {
-                return Redirect("/Pet");
-            }
-            return View(pet);
+                Name = pet.Name,
+                Color = pet.Color,
+                Weight = pet.Weight,
+                Gender = pet.Gender,
+                Birthday = pet.Birthday,
+                Microchipped = pet.Microchipped,
+                ExistingPhotoPath = pet.PhotoPath
+            };
+            return View(profileViewModel);
 
         }
 
@@ -100,13 +106,16 @@ namespace SeeSpot.Controllers
                 Name = pet.Name,
                 Color = pet.Color,
                 Weight = pet.Weight,
+                Gender = pet.Gender,
+                Birthday = pet.Birthday,
+                Microchipped = pet.Microchipped,
                 ExistingPhotoPath = pet.PhotoPath
             };
             return View(editProfileViewModel);
         }
 
         [HttpPost]
-        public IActionResult Edit(EditProfileViewModel model)
+        public IActionResult EditProfile(EditProfileViewModel model)
         {
             if (ModelState.IsValid)
             {
