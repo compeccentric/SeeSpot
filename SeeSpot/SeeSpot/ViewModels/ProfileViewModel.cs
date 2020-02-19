@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace SeeSpot.ViewModels
 {
-    public class ProfileViewModel
+    public class ProfileViewModel : AddPetViewModel
     {
-        //public Pet Pet { get; set; }
-
-        //public string PageTitle { get; set; }
+        public Pet Pet { get; set; }
+        public int ID { get; set; }
+        public string ExistingPhotoPath { get; set; }
+        public string Breed { get; set; }
+        
     }
 }

@@ -44,7 +44,7 @@ namespace SeeSpot.ViewModels
 
         }
         [DataType(DataType.Date)]
-        public DateTime? Birthday { get; set; }
+        public DateTime Birthday { get; set; }
         public bool Fixed { get; set; }
         public bool Microchipped { get; set; }
         public string Color { get; set; }
