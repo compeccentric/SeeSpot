@@ -1,9 +1,20 @@
 ﻿@model SeeSpot.ViewModels.AddPetViewModel
-
+@inject SignInManager<ApplicationUser> signInManager;
+@inject UserManager<ApplicationUser> userManager;
 <h1>Add Pet</h1>
 
 <form asp-controller="Pet" enctype="multipart/form-data" asp-action="Add" method="post">
+    @if (signInManager.IsSignedIn(User))
+    {
+        // Get the current logged in user
+        Task<ApplicationUser> GetCurrentUserAsync() => userManager.GetUserAsync(User);
 
+        var user = await GetCurrentUserAsync();
+        var Id = user.Id;
+
+        <input asp-for="OwnerId" type="hidden" value="@Id">
+
+    }
     <div class="form-group">
         <label asp-for="Name"></label>
         <input class="form-control" asp-for="Name" />

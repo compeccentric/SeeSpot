@@ -8,6 +8,7 @@ namespace SeeSpot.Models
     public class Pet
     {
         public int ID { get; set; }
+        public string OwnerId { get; set; }
         public string Name { get; set; }
         public string Gender { get; set; }
         public int Weight { get; set; }

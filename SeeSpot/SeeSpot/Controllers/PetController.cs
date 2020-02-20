@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SeeSpot.Data;
 using SeeSpot.Models;
@@ -15,24 +17,30 @@ namespace SeeSpot.Controllers
     public class PetController : Controller
     {
         private readonly SeeSpotDbContext context;
-       
+        private readonly UserManager<ApplicationUser> userManager;
         private readonly IHostingEnvironment hostingEnvironment;
         
         public PetController(SeeSpotDbContext dbContext, 
-                            IHostingEnvironment hostingEnvironment)
+                            IHostingEnvironment hostingEnvironment, UserManager<ApplicationUser> userManager)
                             
         {
             context = dbContext;
             this.hostingEnvironment = hostingEnvironment;
-           
-           
-        }
-        public IActionResult Index()
-        {
-            IList<Pet> pets = context.Pets.ToList();
-                                         
+            this.userManager = userManager;
 
-            return View(pets);
+        }
+        public async Task<IActionResult> Index()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);// will give the user's userId
+            var userName = User.FindFirstValue(ClaimTypes.Name); // will give the user's userName
+
+            ApplicationUser applicationUser = await userManager.GetUserAsync(User);
+            string userEmail = applicationUser?.Email; // will give the user's Email
+            var OwnerPets = from m in context.Pets
+                              where m.OwnerId == userId
+                              select m;
+            ViewBag.OwnerPets = OwnerPets;
+            return View();
         }
         public IActionResult Add()
         {
@@ -62,6 +70,7 @@ namespace SeeSpot.Controllers
                 Pet newPet = new Pet
                 {
                     Name = model.Name,
+                    OwnerId= model.OwnerId,
                     Weight = model.Weight,
                     Breed = newBreed,
                     PhotoPath = uniqueFileName,

@@ -14,6 +14,7 @@ namespace SeeSpot.ViewModels
         [Required]
         [Display(Name = "Pet Name")]
         public string Name { get; set; }
+        public string OwnerId { get; set; }
 
         [Required(ErrorMessage = "You must give your pet a Name")]
         public string Gender { get; set; }

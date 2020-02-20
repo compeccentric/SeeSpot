@@ -1,9 +1,30 @@
-﻿@model List<SeeSpot.Models.Pet>
+﻿@*@model List<SeeSpot.Models.Pet>*@
 
 <h1>Pets</h1>
 <a asp-controller="Pet" asp-action="Add">Add</a>&nbsp;&nbsp;
 @*<a asp-controller="Pet" asp-action="Remove">Remove</a>*@
-@if (Model.Count == 0)
+@if (Enumerable.Count(ViewBag.OwnerPets) == 0)
+{
+    <p>No Pets yet!</p>
+}
+<table class="table">
+    @foreach (var pet in ViewBag.OwnerPets)
+    {
+        <tr>
+            <th>@pet.Name</th>
+            <th><a asp-controller="Pet" asp-action="Profile" asp-route-id="@pet.ID">Profile</a></th>
+            <th><a asp-controller="Pet" asp-action="EditProfile" asp-route-id="@pet.ID">Edit Profile</a></th>
+            <th><a asp-controller="Pet" asp-action="Delete" asp-route-id="@pet.ID">Delete</a></th>
+        </tr>
+    }
+</table>
+
+
+
+
+
+
+@*@if (Model.Count == 0)
 {
     <p>No Pets yet!</p>
 }
@@ -11,17 +32,19 @@
 {
     var photoPath = "~/images/" + (pet.PhotoPath ?? "noimage.jpg");
     <h2>@pet.Name</h2>
-    
-   
+
+
     <br />
-    
+
     <td>
         <a asp-action="EditProfile" asp-controller="pet" asp-route-ID="@pet.ID">Edit</a>
         <a asp-action="Profile" asp-route-ID="@pet.ID">Profile</a>
         <a asp-action="Delete" asp-route-ID="@pet.ID">Delete</a>
     </td>
     <br />
-    <img src="@photoPath" asp-append-version="true" />  
+    <img src="@photoPath" asp-append-version="true" />
 
-}
+
+
+}*@
 
