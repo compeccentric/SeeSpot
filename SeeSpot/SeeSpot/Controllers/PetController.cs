@@ -84,6 +84,7 @@ namespace SeeSpot.Controllers
             Pet pet = context.Pets.Find(ID);
             ProfileViewModel profileViewModel = new ProfileViewModel
             {
+                ID = pet.ID,
                 Name = pet.Name,
                 Color = pet.Color,
                 Weight = pet.Weight,
@@ -103,6 +104,7 @@ namespace SeeSpot.Controllers
             Pet pet = context.Pets.Find(ID);
             EditProfileViewModel editProfileViewModel = new EditProfileViewModel
             {
+                ID = pet.ID,
                 Name = pet.Name,
                 Color = pet.Color,
                 Weight = pet.Weight,
