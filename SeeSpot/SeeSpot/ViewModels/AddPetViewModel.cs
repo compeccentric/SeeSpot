@@ -22,7 +22,7 @@ namespace SeeSpot.ViewModels
 
         [Required]
         [Display(Name = "Breed")]
-        public int BreedID { get; set; }
+        public string BreedName { get; set; }
 
         public List<SelectListItem> Breeds { get; set; }
 
@@ -36,7 +36,7 @@ namespace SeeSpot.ViewModels
             {
                 Breeds.Add(new SelectListItem
                 {
-                    Value = breed.ID.ToString(),
+                    Value = breed.Name.ToString(),
                     Text = breed.Name.ToString()
                 });
 

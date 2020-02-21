@@ -17,7 +17,7 @@ namespace SeeSpot.Models
         public bool Microchipped { get; set; }
         public string Color { get; set; }
         public Breed Breed { get; set; }
-        public int BreedID { get; set; }
+        public string BreedName { get; set; }
         public string PhotoPath { get; set; }
         
 

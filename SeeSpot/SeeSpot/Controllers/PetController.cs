@@ -63,8 +63,8 @@ namespace SeeSpot.Controllers
                     model.Photo.CopyTo(new FileStream(filePath, FileMode.Create));
                 }
                                                                                            
-                Breed newBreed =
-                    context.Breeds.Single(c => c.ID == model.BreedID);
+                //Breed newBreed =
+                //    context.Breeds.Single(c => c.ID == model.BreedID);
 
                 // Add the new cheese to my existing cheeses
                 Pet newPet = new Pet
@@ -72,7 +72,7 @@ namespace SeeSpot.Controllers
                     Name = model.Name,
                     OwnerId= model.OwnerId,
                     Weight = model.Weight,
-                    Breed = newBreed,
+                    BreedName = model.BreedName,
                     PhotoPath = uniqueFileName,
                     Gender = model.Gender,
                     Color = model.Color                             
@@ -100,7 +100,8 @@ namespace SeeSpot.Controllers
                 Gender = pet.Gender,
                 Birthday = pet.Birthday,
                 Microchipped = pet.Microchipped,
-                ExistingPhotoPath = pet.PhotoPath
+                ExistingPhotoPath = pet.PhotoPath,
+                BreedName = pet.BreedName
             };
             return View(profileViewModel);
 
