@@ -45,6 +45,16 @@
         <input class="form-control" asp-for="Fixed" />
         <span asp-validation-for="Fixed"></span>
     </div>
+    <div>
+        @Html.DropDownListFor(m => m.Fixed, new SelectList(
+        new[] {
+            new { Value = "true", Text = "YES" },
+            new { Value = "false", Text = "NO" },
+        },
+        "Value",
+        "Text"
+    ))
+    </div>
     <div class="form-group">
         <label asp-for="Microchipped"></label>
         <input class="form-control" asp-for="Microchipped" />

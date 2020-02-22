@@ -19,10 +19,10 @@ namespace SeeSpot.Controllers
         private readonly SeeSpotDbContext context;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IHostingEnvironment hostingEnvironment;
-        
-        public PetController(SeeSpotDbContext dbContext, 
+
+        public PetController(SeeSpotDbContext dbContext,
                             IHostingEnvironment hostingEnvironment, UserManager<ApplicationUser> userManager)
-                            
+
         {
             context = dbContext;
             this.hostingEnvironment = hostingEnvironment;
@@ -37,8 +37,8 @@ namespace SeeSpot.Controllers
             ApplicationUser applicationUser = await userManager.GetUserAsync(User);
             string userEmail = applicationUser?.Email; // will give the user's Email
             var OwnerPets = from m in context.Pets
-                              where m.OwnerId == userId
-                              select m;
+                            where m.OwnerId == userId
+                            select m;
             ViewBag.OwnerPets = OwnerPets;
             return View();
         }
@@ -47,11 +47,11 @@ namespace SeeSpot.Controllers
             AddPetViewModel addPetViewModel = new AddPetViewModel(context.Breeds.ToList());
             return View(addPetViewModel);
         }
-        
+
         [HttpPost]
         public IActionResult Add(AddPetViewModel model)
-        { 
-     
+        {
+
             if (ModelState.IsValid)
             {
                 string uniqueFileName = null;
@@ -62,7 +62,7 @@ namespace SeeSpot.Controllers
                     string filePath = Path.Combine(uploadsFolder, uniqueFileName);
                     model.Photo.CopyTo(new FileStream(filePath, FileMode.Create));
                 }
-                                                                                           
+
                 //Breed newBreed =
                 //    context.Breeds.Single(c => c.ID == model.BreedID);
 
@@ -70,12 +70,15 @@ namespace SeeSpot.Controllers
                 Pet newPet = new Pet
                 {
                     Name = model.Name,
-                    OwnerId= model.OwnerId,
+                    OwnerId = model.OwnerId,
                     Weight = model.Weight,
                     BreedName = model.BreedName,
                     PhotoPath = uniqueFileName,
                     Gender = model.Gender,
-                    Color = model.Color                             
+                    Color = model.Color,
+                    Birthday = model.Birthday,
+                    Microchipped = model.Microchipped,
+                    Fixed = model.Fixed
                 };
 
                 context.Pets.Add(newPet);
@@ -110,7 +113,7 @@ namespace SeeSpot.Controllers
         [HttpGet]
         public ActionResult EditProfile(int ID)
         {
-            
+
             Pet pet = context.Pets.Find(ID);
             EditProfileViewModel editProfileViewModel = new EditProfileViewModel
             {
@@ -136,16 +139,16 @@ namespace SeeSpot.Controllers
                 pet.Color = model.Color;
                 pet.Weight = model.Weight;
 
-                if(model.Photo != null)
+                if (model.Photo != null)
                 {
-                    if(model.ExistingPhotoPath != null)
+                    if (model.ExistingPhotoPath != null)
                     {
                         string filePath = Path.Combine(hostingEnvironment.WebRootPath,
                             "images", model.ExistingPhotoPath);
                         System.IO.File.Delete(filePath);
                     }
                     pet.PhotoPath = ProcessUploadedFile(model);
-                        
+
                 }
                 Pet updatedPet = context.Pets.Find(model.ID);
 
@@ -182,25 +185,25 @@ namespace SeeSpot.Controllers
 
 
 
-        //public IActionResult Remove()
-        //{
-        //    ViewBag.title = "Remove Pets";
-        //    ViewBag.pets = context.Pets.ToList();
-        //    return View();
-        //}
+        public IActionResult Remove()
+        {
+            ViewBag.title = "Remove Pets";
+            ViewBag.pets = context.Pets.ToList();
+            return View();
+        }
 
-        //[HttpPost]
-        //public IActionResult Remove(int[] PetIds)
-        //{
-        //    foreach (int petID in petIDs)
-        //    {
-        //        Pet thePet = context.Pets.Single(c => c.ID == petID);
-        //        context.Pets.Remove(thePet);
-        //    }
+        [HttpPost]
+        public IActionResult Remove(int petID)
+        {
 
-        //    context.SaveChanges();
+            Pet thePet = context.Pets.Single(c => c.ID == petID);
+            context.Pets.Remove(thePet);
 
-        //    return Redirect("/");
-        //}
+
+            context.SaveChanges();
+
+            return Redirect("/");
+
+        }
     }
 }

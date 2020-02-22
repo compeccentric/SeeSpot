@@ -13,7 +13,7 @@ namespace SeeSpot.Models
         public string Gender { get; set; }
         public int Weight { get; set; }
         public DateTime Birthday { get; set; }
-        public bool Fixed { get; set; }
+        public string Fixed { get; set; }
         public bool Microchipped { get; set; }
         public string Color { get; set; }
         public Breed Breed { get; set; }
