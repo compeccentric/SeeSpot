@@ -186,36 +186,20 @@ namespace SeeSpot.Controllers
 
             return uniqueFileName;
         }
-
-
-
-
-
-
-
-
-
-
-
-        public IActionResult Remove()
+        public async Task<IActionResult> Delete(int id)
         {
-            ViewBag.title = "Remove Pets";
-            ViewBag.pets = context.Pets.ToList();
-            return View();
+            var medication = await context.Pets.FindAsync(id);
+            context.Pets.Remove(medication);
+            await context.SaveChangesAsync();
+            return RedirectToAction("Index");
+
         }
 
-        [HttpPost]
-        public IActionResult Remove(int petID)
-        {
-
-            Pet thePet = context.Pets.Single(c => c.ID == petID);
-            context.Pets.Remove(thePet);
 
 
-            context.SaveChanges();
 
-            return Redirect("/");
 
-        }
+
+
     }
 }
