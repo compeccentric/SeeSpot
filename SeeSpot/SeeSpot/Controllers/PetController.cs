@@ -98,13 +98,16 @@ namespace SeeSpot.Controllers
             {
                 ID = pet.ID,
                 Name = pet.Name,
+                Birthday = pet.Birthday,
                 Color = pet.Color,
                 Weight = pet.Weight,
                 Gender = pet.Gender,
-                Birthday = pet.Birthday,
+                BreedName = pet.BreedName,                
                 Microchipped = pet.Microchipped,
-                ExistingPhotoPath = pet.PhotoPath,
-                BreedName = pet.BreedName
+                Fixed = pet.Fixed,
+                ExistingPhotoPath = pet.PhotoPath
+                
+                
             };
             return View(profileViewModel);
 
@@ -119,12 +122,15 @@ namespace SeeSpot.Controllers
             {
                 ID = pet.ID,
                 Name = pet.Name,
+                Birthday = pet.Birthday,
                 Color = pet.Color,
                 Weight = pet.Weight,
                 Gender = pet.Gender,
-                Birthday = pet.Birthday,
+                BreedName = pet.BreedName,
                 Microchipped = pet.Microchipped,
+                Fixed = pet.Fixed,
                 ExistingPhotoPath = pet.PhotoPath
+                
             };
             return View(editProfileViewModel);
         }
@@ -136,8 +142,14 @@ namespace SeeSpot.Controllers
             {
                 Pet pet = context.Pets.Find(model.ID);
                 pet.Name = model.Name;
+                pet.Birthday = model.Birthday;
                 pet.Color = model.Color;
                 pet.Weight = model.Weight;
+                pet.Gender = model.Gender;
+                pet.BreedName = model.BreedName;
+                pet.Microchipped = model.Microchipped;
+                pet.Fixed = model.Fixed;
+                pet.PhotoPath = model.ExistingPhotoPath;
 
                 if (model.Photo != null)
                 {

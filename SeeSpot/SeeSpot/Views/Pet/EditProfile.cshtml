@@ -11,16 +11,23 @@
 <form asp-controller="Pet" asp-action="edit" enctype="multipart/form-data" method="post" class="mt-3">
     <div asp-validation-summary="All" class="text-danger">
     </div>
-    
+
     <input hidden asp-for="ID" />
     <input hidden asp-for="ExistingPhotoPath" />
 
-    
+
     <div class="form-group row">
         <label asp-for="Name" class="col-sm-2 col-form-label"></label>
         <div class="col-sm-10">
             <input asp-for="Name" class="form-control" placeholder="Name">
             <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="Birthday" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="Birthday" class="form-control" placeholder="Name">
+            <span asp-validation-for="Birthday" class="text-danger"></span>
         </div>
     </div>
     <div class="form-group row">
@@ -38,7 +45,44 @@
             <span asp-validation-for="Weight" class="text-danger"></span>
         </div>
     </div>
-
+    <div class="form-group row">
+        <label asp-for="Gender" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="Gender" class="form-control" placeholder="Gender">
+            <span asp-validation-for="Gender" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="BreedName" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="BreedName" class="form-control" placeholder="BreedName">
+            <span asp-validation-for="BreedName" class="text-danger"></span>
+        </div>
+    </div>
+    <div>
+        <label asp-for="Microchipped" class="col-sm-2 col-form-label"></label>
+        @Html.DropDownListFor(m => m.Microchipped, new SelectList(new[]
+        {
+            new { Value = "true", Text = "YES" },
+            new { Value = "false", Text = "NO" },
+        },
+        "Value",
+        "Text"
+        ))
+       
+    </div>
+    <div>
+        <label asp-for="Fixed" class="col-sm-2 col-form-label"></label>
+        @Html.DropDownListFor(m => m.Fixed, new SelectList(new[]
+        {
+            new { Value = "true", Text = "YES" },
+            new { Value = "false", Text = "NO" },
+        },
+        "Value",
+        "Text"
+        ))
+    </div>
+    
     <div class="form-group row">
         <label asp-for="Photo" class="col-sm-2 col-form-label"></label>
         <div class="col-sm-10">
