@@ -8,7 +8,7 @@
 
 <h1>Edit</h1>
 
-<form asp-controller="Pet" asp-action="edit" enctype="multipart/form-data" method="post" class="mt-3">
+<form asp-controller="Pet" asp-action="EditProfile" enctype="multipart/form-data" method="post" class="mt-3">
     <div asp-validation-summary="All" class="text-danger">
     </div>
 
@@ -69,7 +69,7 @@
         "Value",
         "Text"
         ))
-       
+
     </div>
     <div>
         <label asp-for="Fixed" class="col-sm-2 col-form-label"></label>
@@ -82,7 +82,7 @@
         "Text"
         ))
     </div>
-    
+
     <div class="form-group row">
         <label asp-for="Photo" class="col-sm-2 col-form-label"></label>
         <div class="col-sm-10">
@@ -97,7 +97,7 @@
     <div class="form-group row col-sm-4 offset-4">
         <img class="imageThumbnail" src="@photoPath" asp-append-version="true" />
     </div>
-
+    <div asp-validation-summary="All" class="text-danger"></div>
     <div class="form-group row">
         <div class="col-sm-10">
             <button type="submit" class="btn btn-primary">Update</button>

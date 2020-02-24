@@ -162,8 +162,10 @@ namespace SeeSpot.Controllers
                     pet.PhotoPath = ProcessUploadedFile(model);
 
                 }
-                Pet updatedPet = context.Pets.Find(model.ID);
-
+              
+                
+                context.Update(pet);
+                context.SaveChanges();
                 return RedirectToAction("index");
             }
             return View(model);
