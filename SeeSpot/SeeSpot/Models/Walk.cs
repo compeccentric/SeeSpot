@@ -16,6 +16,8 @@ namespace SeeSpot.Models
         public DateTime Date { get; set; }
         public DateTime Time { get; set; }
         public string Notes { get; set; }
+
+        public virtual Pet Pets { get; set; }
         
     }
 }

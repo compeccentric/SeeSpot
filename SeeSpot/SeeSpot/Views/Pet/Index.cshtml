@@ -10,12 +10,13 @@
 <table class="table">
     @foreach (var pet in ViewBag.OwnerPets)
     {
-        <tr>
-            <th>@pet.Name</th>
-            <th><a asp-controller="Pet" asp-action="Profile" asp-route-id="@pet.ID">Profile</a></th>
-            <th><a asp-controller="Pet" asp-action="EditProfile" asp-route-id="@pet.ID">Edit Profile</a></th>
-            <th><a asp-controller="Pet" asp-action="Delete" asp-route-id="@pet.ID">Delete</a></th>
-        </tr>
+    <tr>
+        <th>@pet.Name</th>
+        <th><a asp-controller="Pet" asp-action="Profile" asp-route-id="@pet.ID">Profile</a></th>
+        <th><a asp-controller="Walk" asp-action="Details" asp-route-id="@pet.ID">Walks</a></th>
+        <th><a asp-controller="Pet" asp-action="EditProfile" asp-route-id="@pet.ID">Edit Profile</a></th>
+        <th><a asp-controller="Pet" asp-action="Delete" asp-route-id="@pet.ID">Delete</a></th>
+    </tr>
     }
 </table>
 

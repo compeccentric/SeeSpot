@@ -21,7 +21,7 @@ namespace SeeSpot.Models
         public string PhotoPath { get; set; }
         
 
-        //public IList<Pet> Pets { get; set; }
+        public virtual ICollection<Walk> Walks { get; set; }
     }
 
     

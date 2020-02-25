@@ -92,7 +92,7 @@ namespace SeeSpot.Controllers
 
         public ActionResult Profile(int ID)
         {
-
+            
             Pet pet = context.Pets.Find(ID);
             ProfileViewModel profileViewModel = new ProfileViewModel
             {
@@ -105,12 +105,13 @@ namespace SeeSpot.Controllers
                 BreedName = pet.BreedName,                
                 Microchipped = pet.Microchipped,
                 Fixed = pet.Fixed,
-                ExistingPhotoPath = pet.PhotoPath
+                ExistingPhotoPath = pet.PhotoPath,
                 
                 
             };
             return View(profileViewModel);
-
+            
+            
         }
 
         [HttpGet]
