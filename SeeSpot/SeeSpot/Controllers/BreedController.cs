@@ -55,5 +55,22 @@ namespace SeeSpot.Controllers
 
             return View(addBreedViewModel);
         }
+        public IActionResult Delete()
+        {
+            List<Breed> breeds = context.Breeds.ToList();
+            return View(breeds);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(int[] categoryIds)
+        {
+            foreach (int categoryId in categoryIds)
+            {
+                Breed theBreed = context.Breeds.Single(c => c.ID == categoryId);
+                context.Breeds.Remove(theBreed);
+            }
+            context.SaveChanges();
+            return Redirect("/Breed");
+        }
     }
 }

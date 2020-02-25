@@ -1,0 +1,12 @@
+﻿@model List<SeeSpot.Models.Breed>
+
+
+<h1>Remove Breed</h1>
+<form method="post">
+    @foreach (var breed in Model)
+    {
+        <input type="checkbox" name="categoryIds" id="@breed.ID" value="@breed.ID" />
+        <label for="@breed.ID">@breed.Name</label><br />
+    }
+    <input type="submit" value="Remove Selected Breed(s)" />
+</form>
