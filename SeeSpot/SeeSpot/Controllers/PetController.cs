@@ -118,7 +118,7 @@ namespace SeeSpot.Controllers
         {
 
             Pet pet = context.Pets.Find(ID);
-            EditProfileViewModel editProfileViewModel = new EditProfileViewModel
+            EditProfileViewModel editProfileViewModel = new EditProfileViewModel(context.Breeds.ToList())
             {
                 ID = pet.ID,
                 Name = pet.Name,

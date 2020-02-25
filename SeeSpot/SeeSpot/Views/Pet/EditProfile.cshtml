@@ -55,10 +55,20 @@
     <div class="form-group row">
         <label asp-for="BreedName" class="col-sm-2 col-form-label"></label>
         <div class="col-sm-10">
-            <select asp-for="BreedName" class="form-control" asp-items="Model.Breeds"></select>
+            <select asp-for="BreedName" class="custom-select mr-sm-2"
+                    asp-items="Model.Breeds">
+                <option value="">Please Select</option>
+            </select>
             <span asp-validation-for="BreedName" class="text-danger"></span>
         </div>
     </div>
+    @*<div class="form-group row">
+        <label asp-for="BreedName" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <select asp-for="BreedName" class="form-control" asp-items="Model.Breeds"></select>
+            <span asp-validation-for="BreedName" class="text-danger"></span>
+        </div>
+    </div>*@
     <div>
         <label asp-for="Microchipped" class="col-sm-2 col-form-label"></label>
         @Html.DropDownListFor(m => m.Microchipped, new SelectList(new[]
