@@ -55,7 +55,7 @@
     <div class="form-group row">
         <label asp-for="BreedName" class="col-sm-2 col-form-label"></label>
         <div class="col-sm-10">
-            <input asp-for="BreedName" class="form-control" placeholder="BreedName">
+            <select asp-for="BreedName" class="form-control" asp-items="Model.Breeds"></select>
             <span asp-validation-for="BreedName" class="text-danger"></span>
         </div>
     </div>

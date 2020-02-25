@@ -1,0 +1,60 @@
+﻿@model SeeSpot.ViewModels.DetailsWalkViewModel
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+
+<div>
+
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            <label asp-for="Distance"></label>
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Distance
+        </dd>
+        <dt class="col-sm-2">
+            <label asp-for="Poop"></label>
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Poop
+        </dd>
+        <dt class="col-sm-2">
+            <label asp-for="Pee"></label>
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Pee
+        </dd>
+        <dt class="col-sm-2">
+            <label asp-for="Date"></label>
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Date.ToShortDateString()
+        </dd>
+        <dt class="col-sm-2">
+            <label asp-for="Time"></label>
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Time.ToShortTimeString()
+        </dd>
+        <dt class="col-sm-2">
+            <label asp-for="Notes"></label>
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Notes
+        </dd>
+       
+    </dl>
+
+
+
+</div>
+<div>
+    <a asp-action="Edit" asp-controller="walk" asp-route-ID="@Model.ID">Edit</a>|
+    <a asp-action="Index">Back to List</a>
+
+
+</div>

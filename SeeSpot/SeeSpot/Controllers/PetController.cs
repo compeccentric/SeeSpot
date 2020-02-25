@@ -138,8 +138,11 @@ namespace SeeSpot.Controllers
         [HttpPost]
         public IActionResult EditProfile(EditProfileViewModel model)
         {
+            
             if (ModelState.IsValid)
             {
+                
+               
                 Pet pet = context.Pets.Find(model.ID);
                 pet.Name = model.Name;
                 pet.Birthday = model.Birthday;
@@ -162,8 +165,9 @@ namespace SeeSpot.Controllers
                     pet.PhotoPath = ProcessUploadedFile(model);
 
                 }
-              
+
                 
+
                 context.Update(pet);
                 context.SaveChanges();
                 return RedirectToAction("index");
@@ -190,18 +194,11 @@ namespace SeeSpot.Controllers
         }
         public async Task<IActionResult> Delete(int id)
         {
-            var medication = await context.Pets.FindAsync(id);
-            context.Pets.Remove(medication);
+            var pet = await context.Pets.FindAsync(id);
+            context.Pets.Remove(pet);
             await context.SaveChangesAsync();
             return RedirectToAction("Index");
 
         }
-
-
-
-
-
-
-
     }
 }

@@ -5,10 +5,8 @@ using System.Threading.Tasks;
 
 namespace SeeSpot.ViewModels
 {
-    public class EditProfileViewModel : AddPetViewModel
+    public class DetailsWalkViewModel : AddWalkViewModel
     {
         public int ID { get; set; }
-        public string ExistingPhotoPath { get; set; }
-        
     }
 }

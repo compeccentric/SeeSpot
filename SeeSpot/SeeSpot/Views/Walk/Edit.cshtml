@@ -1,0 +1,54 @@
+﻿@model SeeSpot.ViewModels.EditWalkViewModel
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+<form asp-controller="Walk" asp-action="Edit" method="post">
+
+    <div class="form-group">
+        <label asp-for="Distance"></label>
+        <input class="form-control" asp-for="Distance" />
+        <span asp-validation-for="Distance"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Poop"></label>
+        <input class="form-check" asp-for="Poop" />
+        <label asp-for="Pee"></label>
+        <input class="form-check" asp-for="Pee" />
+
+
+        @*<p>@Html.Label("Poop")&nbsp;@Html.CheckBox("Yes", false)</p>
+            <p>@Html.Label("Pee")&nbsp;@Html.CheckBox("Yes", false)</p>*@
+    </div>
+
+
+    <div class="form-group">
+        <label asp-for="Date"></label>
+        <input class="form-control" asp-for="Date" />
+        <span asp-validation-for="Date"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Time"></label>
+        <input class="form-control" asp-for="Time" />
+        <span asp-validation-for="Time"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Notes"></label>
+        <input class="form-control" asp-for="Notes" />
+        <span asp-validation-for="Notes"></span>
+    </div>
+
+
+    <div class="form-group row">
+        <div class="col-sm-10">
+            <button type="submit" class="btn btn-primary">Update</button>
+            <a asp-action="details" asp-controller="walk" asp-route-id="@Model.ID" class="btn btn-primary">Cancel</a>
+        </div>
+    </div>
+
+</form>
+

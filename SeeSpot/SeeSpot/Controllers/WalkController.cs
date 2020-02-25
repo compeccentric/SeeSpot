@@ -25,6 +25,26 @@ namespace SeeSpot.Controllers
 
             return View(walks);
         }
+        public ActionResult Details(int ID)
+        {
+
+            Walk walk = context.Walks.Find(ID);
+            DetailsWalkViewModel detailsWalkViewModel = new DetailsWalkViewModel
+            {
+                ID = walk.ID,
+                Distance = walk.Distance,
+                Poop = walk.Poop,
+                Pee = walk.Pee,
+                Date = walk.Date,
+                Time = walk.Time,
+                Notes = walk.Notes
+
+
+
+            };
+            return View(detailsWalkViewModel);
+
+        }
 
 
         public IActionResult Add()
@@ -60,6 +80,57 @@ namespace SeeSpot.Controllers
             }
 
             return View(addWalkViewModel);
+        }
+        [HttpGet]
+        public ActionResult Edit(int ID)
+        {
+
+            Walk walk = context.Walks.Find(ID);
+            EditWalkViewModel editWalkViewModel = new EditWalkViewModel
+            {
+                ID = walk.ID,
+                Distance = walk.Distance,
+                Poop = walk.Poop,
+                Pee = walk.Pee,
+                Date = walk.Date,
+                Time = walk.Time,
+                Notes = walk.Notes,
+                
+
+            };
+            return View(editWalkViewModel);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(EditWalkViewModel model)
+        {
+
+            if (ModelState.IsValid)
+            {
+
+
+                Walk walk = context.Walks.Find(model.ID);
+                walk.ID = model.ID;
+                walk.Distance = model.Distance;
+                walk.Poop = model.Poop;
+                walk.Pee = model.Pee;
+                walk.Date = model.Date;
+                walk.Time = model.Time;
+                walk.Notes = model.Notes;
+
+                context.Update(walk);
+                context.SaveChanges();
+                return RedirectToAction("index");
+            }
+            return View(model);
+        }
+        public async Task<IActionResult> Delete(int id)
+        {
+            var walk = await context.Walks.FindAsync(id);
+            context.Walks.Remove(walk);
+            await context.SaveChangesAsync();
+            return RedirectToAction("Index");
+
         }
     }
 }
